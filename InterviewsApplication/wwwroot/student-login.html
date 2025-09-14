@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    
+    
+    
+    
+  <link rel="stylesheet" href="./assets/compiled/css/app.css">
+  <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
+  <link rel="stylesheet" href="./assets/compiled/css/auth.css">
+    <link rel="stylesheet" href="./assets/compiled/css/style.css">
+
+</head>
+
+<body>
+    <script src="assets/static/js/initTheme.js"></script>
+    <div id="auth" class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+
+            <div class="col-md-3 d-none d-md-block"></div>
+
+            <div id="auth-left" class="col-md-6">
+                <h1 class="auth-title">Student Log in.</h1>
+                <p class="auth-subtitle mb-3">Log in with your data that you entered during registration.</p>
+
+                <form action="index.html">
+                    <div class="form-group position-relative has-icon-left mb-4">
+                        <input type="text" class="form-control form-control-xl"
+                               placeholder="Username (University ID)" name="university_id"
+                               id="university_id">
+                        <div class="form-control-icon">
+                            <i class="bi bi-person"></i>
+                        </div>
+                    </div>
+                    <div class="form-group position-relative has-icon-left mb-4">
+                        <input type="password" class="form-control form-control-xl"
+                               placeholder="Password (National ID)" name="national_id"
+                               id="national_id">
+                        <div class="form-control-icon">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                    </div>
+
+                    <h4 class="alert-danger text-center">
+                        Username is : from U000001 to U000010
+                        <br />
+                        Password is : from 900000001 to 900000010
+                        <br />
+                        **for testing only**
+                    </h4>
+
+                    <button class="btn btn-primary btn-block btn-lg shadow-lg mt-4">Log in</button>
+                </form>
+            </div>
+
+            <div class="col-md-3 d-none d-md-block"></div>
+
+        </div>
+    </div>
+
+    <!--<script src="assets/static/js/DefaultSettingsBlock.js"></script>-->
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.querySelector("form").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const universityId = document.getElementById("university_id").value.trim();
+            const nationalId = document.getElementById("national_id").value.trim();
+
+            if (!universityId || !nationalId) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Missing Information',
+                    text: 'Please fill in both fields.'
+                });
+                return;
+            }
+
+            try {
+                const response = await fetch("https://localhost:7286/api/Auth/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({
+                        universityID: universityId,
+                        nationalID: nationalId
+                    })
+                });
+
+                if (response.ok) {
+                    sessionStorage.setItem("university_id", universityId);
+
+                    try {
+                        const statusRes = await fetch(`https://localhost:7286/api/StudentStatus/status/latest/${universityId}`, {
+                            credentials: "include"
+                        });
+
+                        if (statusRes.status === 404) {
+                            window.location.href = "Student-data.html";
+                            return;
+                        }
+
+                        if (!statusRes.ok) {
+                            throw new Error("Failed to fetch student status");
+                        }
+
+                        const statusData = await statusRes.json();
+
+                        if (statusData.status === "Fulfilled" || statusData.status === "Reserved") {
+                            window.location.href = "Student-data-print-from-img.html";
+                        } else {
+                            window.location.href = "Student-data.html";
+                        }
+
+                    } catch (innerError) {
+                        console.warn("Status fetch failed, treating as new student:", innerError);
+                        window.location.href = "Student-data.html";
+                    }
+
+                }
+
+                else if (response.status === 401) {
+                    const errorText = await response.text();
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Unauthorized',
+                        text: errorText || 'Invalid university ID or national ID.'
+                    });
+                }
+
+
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Server Error',
+                        text: 'Something went wrong. Please try again.'
+                    });
+                }
+
+            } catch (error) {
+                console.error("Login error:", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login Failed',
+                    text: 'Could not complete login. Please check your credentials or try again.'
+                });
+            }
+        });
+    </script>
+</body>
+
+   
+
+</html>

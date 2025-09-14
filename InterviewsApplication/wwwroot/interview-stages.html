@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Interview Stages
+    </title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+
+
+
+    <link rel="stylesheet" href="./assets/compiled/css/app.css">
+    <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
+    <link rel="stylesheet" href="assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="assets/extensions/flatpickr/flatpickr.min.css">
+
+    <link rel="stylesheet" href="./assets/compiled/css/table-datatable-jquery.css">
+    <link rel="stylesheet" href="./assets/compiled/css/style.css">
+
+</head>
+
+<body>
+    <script src="assets/static/js/initTheme.js"></script>
+    <div id="app">
+        <div id="sidebar">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header position-relative">
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                 role="img" class="iconify iconify--system-uicons" width="20" height="20"
+                                 preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                   stroke-linejoin="round">
+                                    <path d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 19.5v-2m0-14v-2"
+                                          opacity=".3"></path>
+                                    <g transform="translate(-210 -1)">
+                                        <path d="M220.5 2.5v2m6.5.5l-1.5 1.5"></path>
+                                        <circle cx="220.5" cy="11.5" r="4"></circle>
+                                        <path d="m214 5l1.5 1.5m5 14v-2m6.5-.5l-1.5-1.5M214 18l1.5-1.5m-4-5h2m14 0h2"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                            <div class="form-check form-switch fs-6">
+                                <input class="form-check-input  me-0" type="checkbox" id="toggle-dark" style="cursor: pointer">
+                                <label class="form-check-label"></label>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                 role="img" class="iconify iconify--mdi" width="20" height="20" preserveAspectRatio="xMidYMid meet"
+                                 viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14c.4-.4.82-.76 1.27-1.08c.75-.53 1.93.36 1.85 1.19c-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82c-2.81 3.14-2.7 7.96.31 10.98c3.02 3.01 7.84 3.12 10.98.31Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="sidebar-toggler  x">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item " id="menu-dashboard">
+                            <a href="index.html" class="sidebar-link">
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item " id="menu-agents" style="display: none;">
+                            <a href="agents.html" class="sidebar-link">
+                                <i class="bi bi-file-earmark-person"></i>
+                                <span>Agents</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" id="menu-mail" style="display: none;">
+                            <a href="Mail.html" class="sidebar-link">
+                                <i class="bi bi-envelope"></i>
+                                <span>Mail</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" id="menu-schedule" style="display: none;">
+                            <a href="schedule.html" class="sidebar-link">
+                                <i class="bi bi-calendar-day"></i>
+                                <span>Schedule</span>
+                            </a>
+                        </li>
+
+                        <!--<li class="sidebar-item" id="menu-booking">
+        <a href="Students-booking.html" class="sidebar-link">
+            <i class="bi bi-calendar-check"></i>
+            <span>Students Booking</span>
+        </a>
+    </li>-->
+                        <li class="sidebar-item " id="menu-review">
+                            <a href="Review-students.html" class="sidebar-link">
+                                <i class="bi bi-calendar-check"></i>
+                                <span>Review students</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" id="send-emails">
+                            <a href="send-mail.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Send Emails</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" id="menu-interviews">
+                            <a href="interviews-page.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Interviews page</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item active" id="menu-stages">
+                            <a href="interview-stages.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Interview Stages</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" id="menu-stages">
+                            <a href="interview-result.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Interview Results</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" id="menu-stages">
+                            <a href="Acceptance-page.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Acceptance Page</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" id="menu-password">
+                            <a href="change-password.html" class="sidebar-link">
+                                <i class="bi bi-shield-check"></i>
+                                <span>Change Password</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item mx-auto text-center my-4">
+                            <button id="logoutBtn" class="btn btn-primary bg-primary mx-auto text-center">Logout</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Interviews page</h3>
+                            <p class="text-subtitle text-muted">You can find here all Interviews here</p>
+
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Interviews</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div class="row mb-3">
+
+                                    <div class="col-md-3 d-flex align-items-center">
+                                        <label class="me-2">Date:</label>
+                                        <input id="filter-date" type="date" class="form-control flatpickr-no-config" placeholder="Select date..">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-group d-flex align-items-center">
+                                            <label class="me-2">Faculty:</label>
+                                            <select id="filter-faculty" class="form-select rounded">
+                                                <option value="">All Faculties</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select id="filter-attendance" class="form-select" style="width:auto; display:inline-block; margin-left:8px;">
+                                            <option value="">-- Filter by Attendance --</option>
+                                            <option value="personal">Present in Personal</option>
+                                            <option value="medical">Present in Medical</option>
+                                            <option value="english">Present in English</option>
+                                            <option value="all">Present in All</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3 d-flex justify-content-end mb-3">
+                                        <button id="export-btn" class="btn btn-success">Export to Excel</button>
+                                    </div>
+
+                                    <div class="col-md-12 me-3 mt-3 d-flex justify-content-end">
+                                        <input id="search-id"
+                                               type="text"
+                                               class="form-control"
+                                               placeholder="Search by ID"
+                                               style="max-width: 200px;" />
+                                        <button id="reset-filters" class="btn btn-danger ms-4">Reset Filters</button>
+                                    </div>
+
+                                </div>
+                                <table class="table" id="table1">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Personal</th>
+                                            <th>Medical</th>
+                                            <th>English</th>
+                                            <th>ID</th>
+                                            <th>Faculty</th>
+                                            <th>Phone</th>
+                                            <th>Date</th>
+                                            <th>Summary</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="booking-table-body">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <script src="assets/static/js/components/dark.js"></script>
+    <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+
+
+    <script src="assets/compiled/js/app.js"></script>
+
+
+
+
+    <script src="assets/extensions/jquery/jquery.min.js"></script>
+    <script src="assets/extensions/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/extensions/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="assets/static/js/logout.js"></script>
+
+
+    <script src="assets/extensions/flatpickr/flatpickr.min.js"></script>
+    <script src="assets/static/js/pages/date-picker.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        const bookingAPI = 'https://localhost:7286/api/StudentBooking/all';
+        const studentAPI = 'https://localhost:7286/api/StudentsView';
+        const scheduleAPI = 'https://localhost:7286/api/InterviewSchedule';
+        const historyAPI = 'https://localhost:7286/api/InterviewHistory';
+
+        let bookings = [];
+        let students = [];
+        let schedules = [];
+        let histories = [];
+
+        async function fetchData() {
+            try {
+                const [bookingRes, studentRes, scheduleRes, historyRes] = await Promise.all([
+                    fetch(bookingAPI),
+                    fetch(studentAPI),
+                    fetch(scheduleAPI),
+                    fetch(historyAPI)
+                ]);
+
+                bookings = await bookingRes.json();
+                students = await studentRes.json();
+                schedules = await scheduleRes.json();
+                histories = await historyRes.json();
+
+                students.forEach(student => {
+                    student.interviewHistories = histories.filter(h => h.universityID === student.universityID);
+                });
+
+                populateFacultyFilter();
+                renderTable();
+            } catch (error) {
+                console.error("❌ Error fetching data:", error);
+                Swal.fire("Error", "❌ Error fetching data. Please try again.", "error");
+            }
+        }
+
+        function populateFacultyFilter() {
+            const facultySet = new Set(students.map(s => s.college).filter(Boolean));
+            const facultyFilter = document.getElementById('filter-faculty');
+            facultySet.forEach(faculty => {
+                const option = document.createElement('option');
+                option.value = faculty;
+                option.textContent = faculty;
+                facultyFilter.appendChild(option);
+            });
+        }
+
+        function renderTable(filterFaculty = '', filterDate = '', searchID = '', filterAttendance = '') {
+            const tbody = document.getElementById('booking-table-body');
+            tbody.innerHTML = '';
+
+            bookings.forEach(booking => {
+                const student = students.find(s => s.universityID === booking.universityID);
+                const schedule = schedules.find(s => s.scheduleID === booking.scheduleID);
+                if (!student || !schedule) return;
+
+                const interviewDate = new Date(schedule.interviewDate);
+                const yyyy = interviewDate.getFullYear();
+                const mm = String(interviewDate.getMonth() + 1).padStart(2, '0');
+                const dd = String(interviewDate.getDate()).padStart(2, '0');
+                const formattedDate = `${yyyy}-${mm}-${dd}`;
+                const displayDate = interviewDate.toLocaleDateString();
+
+                const studentFaculty = student.college?.trim().toLowerCase() || '';
+                const selectedFaculty = filterFaculty.trim().toLowerCase();
+
+                if (filterFaculty && studentFaculty !== selectedFaculty) return;
+                if (filterDate) {
+                    const selectedDate = new Date(filterDate);
+                    const sameDay = interviewDate.getFullYear() === selectedDate.getFullYear() &&
+                        interviewDate.getMonth() === selectedDate.getMonth() &&
+                        interviewDate.getDate() === selectedDate.getDate();
+                    if (!sameDay) return;
+                }
+                if (searchID && !student.universityID.toString().includes(searchID.trim())) return;
+
+                const histories = student.interviewHistories || [];
+                const presentStages = histories
+                    .filter(h => h.interviewStatus?.toLowerCase() === 'present')
+                    .map(h => h.department?.trim());
+
+                if (filterAttendance) {
+                    const isPersonal = presentStages.includes("Personal Interview");
+                    const isMedical = presentStages.includes("Medical");
+                    const isEnglish = presentStages.includes("English");
+
+                    if (filterAttendance === 'personal' && !isPersonal) return;
+                    if (filterAttendance === 'medical' && !isMedical) return;
+                    if (filterAttendance === 'english' && !isEnglish) return;
+                    if (filterAttendance === 'all' && (!isPersonal || !isMedical || !isEnglish)) return;
+                }
+
+                const row = `
+                    <tr class="student-row"
+                        data-id="${student.universityID}"
+                        data-faculty="${student.college}"
+                        data-date="${formattedDate}">
+                        <td>${student.fullName}</td>
+                        <td class="status-personal">
+                            <input type="checkbox" ${presentStages.includes("Personal Interview") ? 'checked' : ''} disabled>
+                        </td>
+                        <td class="status-medical">
+                            <input type="checkbox" ${presentStages.includes("Medical") ? 'checked' : ''} disabled>
+                        </td>
+                        <td class="status-english">
+                            <input type="checkbox" ${presentStages.includes("English") ? 'checked' : ''} disabled>
+                        </td>
+                        <td>${student.universityID}</td>
+                        <td>${student.college}</td>
+                        <td>${student.phone}</td>
+                        <td>${displayDate}</td>
+                        <td class="summary-cell"></td>
+                    </tr>`;
+
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
+
+            document.querySelectorAll('.student-row').forEach(row => {
+                const summaryCell = row.querySelector('.summary-cell');
+                const absents = [];
+
+                const stageMap = {
+                    "Personal Interview": "Personal",
+                    "Medical": "Medical",
+                    "English": "English"
+                };
+
+                for (const [internal, label] of Object.entries(stageMap)) {
+                    const cell = row.querySelector(`.status-${label.toLowerCase()}`);
+                    const checkbox = cell?.querySelector('input[type="checkbox"]');
+                    if (!checkbox?.checked) {
+                        absents.push(label);
+                    }
+                }
+
+                const summary = absents.length
+                    ? `Absent in: ${absents.join(', ')}`
+                    : '✅ Present in all';
+
+                if (summaryCell) summaryCell.innerText = summary;
+            });
+        }
+
+        ['filter-faculty', 'filter-date', 'filter-attendance', 'search-id'].forEach(id => {
+            document.getElementById(id).addEventListener(id === 'search-id' ? 'input' : 'change', () => {
+                const faculty = document.getElementById('filter-faculty').value;
+                const date = document.getElementById('filter-date').value;
+                const searchID = document.getElementById('search-id').value;
+                const attendance = document.getElementById('filter-attendance').value;
+                renderTable(faculty, date, searchID, attendance);
+            });
+        });
+
+        document.getElementById('reset-filters').addEventListener('click', () => {
+            document.getElementById('filter-date').value = '';
+            document.getElementById('filter-faculty').value = '';
+            document.getElementById('filter-attendance').value = '';
+            document.getElementById('search-id').value = '';
+            renderTable();
+        });
+
+        fetchData();
+    </script>
+
+    <script>
+        document.getElementById('export-btn').addEventListener('click', function () {
+            const table = document.getElementById('table1');
+            const rows = Array.from(table.querySelectorAll('tr'));
+            let csvContent = "";
+
+            rows.forEach((row, index) => {
+                const cells = Array.from(row.querySelectorAll('th, td'));
+                let rowData = [];
+
+                if (row.parentElement.tagName === 'THEAD') {
+                    rowData.push('"No."');
+                    rowData.push(`"${cells[0].innerText.trim()}"`);
+
+                    rowData.push(`"${cells[4].innerText.trim()}"`); 
+                    rowData.push(`"${cells[5].innerText.trim()}"`); 
+                    rowData.push(`"${cells[6].innerText.trim()}"`); 
+                    rowData.push(`"${cells[7].innerText.trim()}"`);
+                    rowData.push(`"${cells[8].innerText.trim()}"`); 
+                } else {
+                    rowData.push(index); 
+                    rowData.push(`"${cells[0].innerText.trim().replace(/"/g, '""')}"`); 
+
+
+                    const studentId = cells[4].innerText.trim();
+                    rowData.push(`"=""${studentId.replace(/"/g, '""')}"""`);
+
+                    rowData.push(`"${cells[5].innerText.trim().replace(/"/g, '""')}"`); 
+                    rowData.push(`"${cells[6].innerText.trim().replace(/"/g, '""')}"`); 
+                    rowData.push(`"${cells[7].innerText.trim().replace(/"/g, '""')}"`); 
+                    rowData.push(`"${cells[8].innerText.trim().replace(/"/g, '""')}"`); 
+                }
+
+                csvContent += rowData.join(",") + "\r\n";
+            });
+
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", "interview_students_export.csv");
+            link.style.display = "none";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
+
+
+
+    <script src="assets/static/js/role-guard.js"></script>
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Student Data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./assets/compiled/css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&family=Amiri&display=swap" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Cairo', 'Amiri', Arial, sans-serif;
+            font-size: 14px;
+            direction: rtl;
+            margin: 20px;
+            unicode-bidi: embed;
+        }
+
+        .a4-page {
+            width: 19cm;
+            min-height: 27cm;
+            border: 1px solid #000;
+            padding: 20px 20px 20px 20px;
+            box-sizing: border-box;
+            background-color: #fff;
+            margin: 40px auto 40px auto;
+            direction: rtl;
+            unicode-bidi: embed;
+        }
+
+
+        .header {
+            text-align: right;
+            position: relative;
+            margin-bottom: 45px;
+            height: 140px;
+        }
+
+        .photo-box {
+            width: 100px;
+            height: 120px;
+            border: 1px solid #000;
+            text-align: center;
+            line-height: 120px;
+            position: absolute;
+            top: 95px;
+            left: 0;
+            font-size: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        td {
+            vertical-align: top;
+            padding: 6px;
+            font-size: 14px;
+        }
+
+        .line {
+            border-bottom: 1px dotted #000;
+            display: inline-block;
+            width: 200px;
+            min-height: 1em;
+        }
+
+        .section-title {
+            text-align: right;
+            font-weight: bold;
+            width: 132px;
+            margin: auto;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="text-center no-print">
+        <button id="setFulfilledBtn" class="btn btn-primary">Set Status to Fulfilled</button>
+        <button id="setPendingBtn" class="btn btn-warning">Set Status to Pending</button>
+    </div>
+
+    <div class="a4-page" id="pdfContent">
+        <div class="header">
+            <div class="photo-box" id="studentPhoto">ضع الصورة هنا</div>
+            <div class="d-flex justify-content-between align-items-center border-bottom pb-3">
+            </div>
+            <div class="row text-center pt-3">
+                <h6>   المقابلات الشخصية الخاصة بلجنة قبول الطلاب الجدد</h6>
+                <h6>  <strong> Personal Interviews</strong></h6>
+
+            </div>
+        </div>
+
+        <div class="section-title">بيانات الطالب</div>
+        <table>
+            <tr>
+                <td>الاسم كاملاً &nbsp; <span class="line" id="fullName"></span></td>
+                <td>تاريخ الميلاد &nbsp;<span class="line" id="birthDate"></span></td>
+            </tr>
+            <tr>
+                <td>الجنسية &nbsp; <span class="line" id="nationality"></span></td>
+                <td>محل الميلاد &nbsp; <span class="line" id="birthPlace"></span></td>
+            </tr>
+            <tr>
+                <td>الديانة &nbsp; <span class="line" id="religion"></span></td>
+                <td>الكلية المتقدم لها &nbsp; <span class="line" id="faculty"></span></td>
+            </tr>
+            <tr>
+                <td>الموبايل &nbsp; <span class="line" id="phoneNumber"></span></td>
+                <td>عنوان السكن &nbsp; <span class="line" id="address"></span></td>
+            </tr>
+            <tr>
+                <td>التليفون الأرضي &nbsp; <span class="line" id="landline"></span></td>
+                <td>اسم المدرسة &nbsp; <span class="line" id="schoolName"></span></td>
+            </tr>
+            <tr>
+                <td>سنة الحصول عليها &nbsp; <span class="line" id="gradYear"></span></td>
+                <td>النسبة المئوية &nbsp; <span class="line" id="percent"></span></td>
+            </tr>
+            <tr>
+                <td colspan="2"> المجموع &nbsp; <span class="line" id="totalScore"></span></td>
+            </tr>
+        </table>
+
+        <div class="section-title">بيانات ولي الأمر</div>
+        <table>
+            <tr>
+                <td>الاسم كاملاً &nbsp;<span class="line" id="guardianName"></span></td>
+                <td>نوع القرابة &nbsp; <span class="line" id="guardianRelation"></span></td>
+            </tr>
+            <tr>
+                <td>المهنة &nbsp; <span class="line" id="guardianJob"></span></td>
+                <td>الموبايل &nbsp;<span class="line" id="guardianPhone"></span></td>
+            </tr>
+            <tr>
+                <td colspan="2"> تليفون العمل &nbsp;<span class="line" id="guardianWorkPhone"></span></td>
+            </tr>
+        </table>
+
+        <div class="section-title">استبيان</div>
+        <table>
+            <tr>
+                <td colspan="2">كيف تعرفت على جامعة Test؟</td>
+            </tr>
+            <tbody id="referralOptionsTable"></tbody>
+            <tr>
+                <td colspan="2">مصادر أخرى <span class="line" id="referralSource"></span></td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td>ممارسة أنشطة رياضية أو هوايات <span class="line" id="activities"></span></td>
+                <td>تحقيق بطولات محلية أو دولية <span class="line" id="awards"></span></td>
+            </tr>
+        </table>
+
+        <div class="section-title border-bottom" style="padding-bottom: 1rem; width: 100%; text-align: center;">ضرورة ملء  كل  البيانات</div>
+        <table>
+            <tr>
+                <td class="text-center w-100 fw-bold fs-6">توقيع لجنة المقابلات الشخصية</td>
+
+            </tr>
+            <tr>
+                <td>تاريخ المقابلة <span class="line"></span></td>
+                <td>يعتمد</td>
+            </tr>
+        </table>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function renderReferralOptions(selectedSources) {
+            const allOptions = [
+                "الأصدقاء والأقارب",
+                "لافتات الطريق",
+                "Facebook",
+                "توزيع مطبوعات الجامعة",
+                "الإعلانات",
+                "الزيارات المدرسية"
+            ];
+            const tableBody = document.getElementById("referralOptionsTable");
+            tableBody.innerHTML = "";
+
+            for (let i = 0; i < allOptions.length; i += 2) {
+                const row = document.createElement("tr");
+                for (let j = 0; j < 2; j++) {
+                    const option = allOptions[i + j];
+                    if (!option) break;
+                    const checked = selectedSources.includes(option) ? "☑" : "☐";
+                    const cell = document.createElement("td");
+                    cell.textContent = `${option} ${checked}`;
+                    row.appendChild(cell);
+                }
+                tableBody.appendChild(row);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const universityId = urlParams.get("universityID");
+            const imageBox = document.getElementById("studentPhoto");
+
+            if (!universityId) {
+                console.error("Missing universityID in URL");
+                return;
+            }
+
+            try {
+                const [studentRes, reviewRes] = await Promise.all([
+                    fetch(`https://localhost:7286/api/StudentsView/${universityId}`, {
+                        credentials: "include"
+                    }),
+                    fetch(`https://localhost:7286/api/StudentsData/review/${universityId}`, {
+                        credentials: "include"
+                    })
+                ]);
+
+                if (!studentRes.ok || !reviewRes.ok) throw new Error("Failed to fetch student data");
+
+                const meData = await studentRes.json();    
+                const reviewData = await reviewRes.json();
+
+                const fill = (id, value) => {
+                    const el = document.getElementById(id);
+                    if (!el) return console.warn(`Missing element: ${id}`);
+                    el.textContent = value ?? '';
+                };
+
+                fill("fullName", meData.fullName);
+                fill("birthDate", meData.birthDate?.split("T")[0]);
+                fill("birthPlace", meData.birthCountry);
+                fill("nationality", meData.nationality);
+                fill("religion", meData.religion);
+                fill("faculty", meData.college || meData.degree);
+                fill("address", meData.address);
+                fill("phoneNumber", meData.phone);
+                fill("landline", meData.landline);
+                fill("schoolName", meData.school);
+                fill("gradYear", meData.dateOfDegree?.split("T")[0]);
+                fill("percent", meData.percentage);
+                fill("totalScore", meData.totalMarks);
+                fill("guardianName", meData.parentName);
+                fill("guardianRelation", meData.relationship);
+                fill("guardianJob", meData.proffesion);
+                fill("guardianPhone", meData.parentPhoneNumber);
+                fill("guardianWorkPhone", meData.workPhoneNumber);
+                renderReferralOptions((reviewData.referralSource ?? "").split(","));
+                fill("referralSource", reviewData.otherReferralSource);
+                fill("activities", reviewData.activities);
+                fill("awards", reviewData.awards);
+
+                if (reviewData.imageAttach) {
+                    imageBox.innerHTML = `<img src="https://localhost:7286/${reviewData.imageAttach}" style="width: 100%; height: 100%; object-fit: cover;" />`;
+                }
+            } catch (err) {
+                console.error("Error fetching student data:", err);
+            }
+        });
+
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        async function updateStudentStatus(statusValue) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const universityId = urlParams.get("universityID");
+
+            if (!universityId) {
+                Swal.fire("❌", "Missing universityID in URL.", "error");
+                return;
+            }
+
+            try {
+                const response = await fetch("https://localhost:7286/api/StudentStatus/update", {
+                    method: "POST",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        universityId: universityId,
+                        newStatus: statusValue
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    Swal.fire("❌ Failed", errorText, "error");
+                    return;
+                }
+
+                const result = await response.json();
+                Swal.fire("✅ Success", result.message, "success");
+            } catch (err) {
+                console.error("Error updating status:", err);
+                Swal.fire("❌ Error", "An error occurred while updating status.", "error");
+            }
+        }
+
+        document.getElementById("setFulfilledBtn").addEventListener("click", () => {
+            updateStudentStatus("Fulfilled");
+        });
+
+        document.getElementById("setPendingBtn").addEventListener("click", () => {
+            updateStudentStatus("Pending");
+        });
+    </script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

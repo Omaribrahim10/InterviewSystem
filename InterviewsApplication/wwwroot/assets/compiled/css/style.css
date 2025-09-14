@@ -1,0 +1,106 @@
+body {
+    background: #f2f7ff url(../../static/images/bg/studentdata-bg.png) no-repeat top right;
+}
+
+.sidebar-wrapper .sidebar-header img {
+    height: 7.5rem;
+}
+
+
+#auth #auth-left .auth-title {
+    text-align: center;
+    font-size: 3rem;
+}
+
+#auth #auth-left .auth-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 20px;
+}
+
+.form-group[class*=has-icon-].has-icon-left .form-control {
+    font-size: 1rem;
+}
+
+.forget p {
+    font-size: 1.2rem;
+}
+
+#auth #auth-right {
+    background: url(../../static/images/bg/login.png), linear-gradient(90deg, #2d499d, #3f5491);
+    background-size: cover;
+    padding-bottom: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    #auth #auth-left {
+        padding: 2rem 3rem;
+    }
+}
+
+/*/student data page/*/
+table.table.student-data tr td {
+    padding: .5rem 1.3rem;
+}
+
+body.cairo-font {
+    font-family: 'Cairo', sans-serif !important;
+}
+/**/
+h4.alert-heading i.bi-file-earmark-person-fill {
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+h4.alert-heading i.bi-file-earmark-person-fill {
+    font-size: 2rem;
+    color: #ffffff;
+}
+
+
+.stud-data-row .card-header h4 {
+    font-size: 1.5rem;
+}
+
+.poll-form .form-check .form-check-input.form-check-primary.form-check-glow {
+    margin-left: 1rem;
+}
+
+.poll-form ul li {
+    width: 240px;
+}
+
+.poll-form .form-check {
+    padding-left: 0;
+}
+
+/* Apply this in style.css */
+
+.poll-form .form-floating > label {
+    right: 0;
+}
+/* student Guidlines*/
+.guide-head i {
+    font-size: 3rem;
+}
+
+ul.guide-ul {
+    list-style: circle;
+}
+
+@media screen and (max-width: 576px) {
+    #groups .card-group {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    #content-types .badge {
+        white-space: normal;
+        line-height: 22px;
+    }
+}
+
+.accept-guidlines .form-check .form-check-input {
+    float: unset;
+    margin-left: 1rem;
+}

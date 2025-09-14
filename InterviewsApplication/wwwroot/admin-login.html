@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Login</title>
+    
+    
+    
+    
+  <link rel="stylesheet" href="./assets/compiled/css/app.css">
+  <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
+  <link rel="stylesheet" href="./assets/compiled/css/auth.css">
+    <link rel="stylesheet" href="./assets/compiled/css/style.css">
+
+</head>
+
+<body>
+    <script src="assets/static/js/initTheme.js"></script>
+    <div id="auth">
+
+        <div class="row h-100">
+            <div class="col-lg-5 col-12">
+                <div id="auth-left" class="pb-0">
+
+                    <h1 class="auth-title">Admin Log in.</h1>
+                    <p class="auth-subtitle mb-3">Please sign in to your account</p>
+
+                    <form id="login-form" onsubmit="return false;">
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="email" class="form-control form-control-xl" placeholder="Username (University email)" name="UniversityEmail"
+                                   id="UniversityEmail">
+                            <div class="form-control-icon">
+                                <i class="bi bi-person"></i>
+                            </div>
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="password" class="form-control form-control-xl" placeholder="Password" name="adminPassword"
+                                   id="adminPassword">
+                            <div class="form-control-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                        </div>
+                        <h4 class="alert-danger text-center">
+                            Username is : superadmin@admin.com
+                            <br />
+                            Password is : SuperAdmin@1234
+                            <br />
+                            **for testing only**
+                        </h4>
+
+                        <button type="submit" id="login-btn" class="btn btn-primary btn-block btn-lg shadow-lg mt-4">Log in</button>
+                    </form>
+
+                </div>
+            </div>
+            <div class="col-lg-7 d-none d-lg-block">
+                <div id="auth-right">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.getElementById("login-btn").addEventListener("click", async () => {
+            const email = document.getElementById("UniversityEmail").value.trim();
+            const password = document.getElementById("adminPassword").value.trim();
+
+            if (!email || !password) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Validation",
+                    text: "Please enter both email and password."
+                });
+                return;
+            }
+
+            const payload = {
+                email: email,
+                password: password
+            };
+
+            try {
+                const response = await fetch("https://localhost:7286/api/Login/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    credentials: "include",
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.text();
+
+                if (!response.ok) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Login Failed",
+                        text: result || "Invalid email or password."
+                    });
+                    return;
+                }
+
+                window.location.href = "index.html";
+            } catch (err) {
+                console.error("Login error:", err);
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Something went wrong. Please try again."
+                });
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
+
+

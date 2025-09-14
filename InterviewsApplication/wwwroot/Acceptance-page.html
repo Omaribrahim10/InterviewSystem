@@ -1,0 +1,638 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceptance-page</title>
+
+
+
+
+    <link rel="stylesheet" href="./assets/compiled/css/app.css">
+    <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
+    <link rel="stylesheet" href="assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="assets/extensions/flatpickr/flatpickr.min.css">
+
+    <link rel="stylesheet" href="./assets/compiled/css/table-datatable-jquery.css">
+    <link rel="stylesheet" href="./assets/compiled/css/style.css">
+
+</head>
+
+<body>
+    <script src="assets/static/js/initTheme.js"></script>
+    <div id="app">
+        <div id="sidebar">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header position-relative">
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                 role="img" class="iconify iconify--system-uicons" width="20" height="20"
+                                 preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                   stroke-linejoin="round">
+                                    <path d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 19.5v-2m0-14v-2"
+                                          opacity=".3"></path>
+                                    <g transform="translate(-210 -1)">
+                                        <path d="M220.5 2.5v2m6.5.5l-1.5 1.5"></path>
+                                        <circle cx="220.5" cy="11.5" r="4"></circle>
+                                        <path d="m214 5l1.5 1.5m5 14v-2m6.5-.5l-1.5-1.5M214 18l1.5-1.5m-4-5h2m14 0h2"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                            <div class="form-check form-switch fs-6">
+                                <input class="form-check-input  me-0" type="checkbox" id="toggle-dark" style="cursor: pointer">
+                                <label class="form-check-label"></label>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                 role="img" class="iconify iconify--mdi" width="20" height="20" preserveAspectRatio="xMidYMid meet"
+                                 viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14c.4-.4.82-.76 1.27-1.08c.75-.53 1.93.36 1.85 1.19c-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82c-2.81 3.14-2.7 7.96.31 10.98c3.02 3.01 7.84 3.12 10.98.31Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="sidebar-toggler  x">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item " id="menu-dashboard">
+                            <a href="index.html" class="sidebar-link">
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item " id="menu-agents" style="display: none;">
+                            <a href="agents.html" class="sidebar-link">
+                                <i class="bi bi-file-earmark-person"></i>
+                                <span>Agents</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" id="menu-mail" style="display: none;">
+                            <a href="Mail.html" class="sidebar-link">
+                                <i class="bi bi-envelope"></i>
+                                <span>Mail</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" id="menu-schedule" style="display: none;">
+                            <a href="schedule.html" class="sidebar-link">
+                                <i class="bi bi-calendar-day"></i>
+                                <span>Schedule</span>
+                            </a>
+                        </li>
+
+                        <!--<li class="sidebar-item" id="menu-booking">
+                            <a href="Students-booking.html" class="sidebar-link">
+                                <i class="bi bi-calendar-check"></i>
+                                <span>Students Booking</span>
+                            </a>
+                        </li>-->
+                        <li class="sidebar-item" id="menu-review">
+                            <a href="Review-students.html" class="sidebar-link">
+                                <i class="bi bi-calendar-check"></i>
+                                <span>Review students</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" id="send-emails">
+                            <a href="send-mail.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Send Emails</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" id="menu-interviews">
+                            <a href="interviews-page.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Interviews page</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" id="menu-stages">
+                            <a href="interview-stages.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Interview Stages</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" id="menu-stages">
+                            <a href="interview-result.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Interview Results</span>
+                            </a>
+                        </li>
+
+
+                        <li class="sidebar-item active" id="menu-stages">
+                            <a href="Acceptance-page.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Acceptance Page</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" id="menu-password">
+                            <a href="change-password.html" class="sidebar-link">
+                                <i class="bi bi-shield-check"></i>
+                                <span>Change Password</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item mx-auto text-center my-4">
+                            <button id="logoutBtn" class="btn btn-primary bg-primary mx-auto text-center">Logout</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Review students</h3>
+                            <p class="text-subtitle text-muted">You can find all Students Applications here</p>
+
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Review students</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">
+                                Review students
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div class="row mb-3">
+
+                                    <div class="col-md-3">
+                                        <div class="input-group d-flex align-items-center">
+                                            <label class="me-2">Faculty:</label>
+                                            <select id="filter-faculty" class="form-select rounded">
+                                                <option value="">All Faculties</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="input-group d-flex align-items-center">
+                                            <label class="me-2">Status:</label>
+                                            <select id="filter-status" class="form-select rounded">
+                                                <option value="">All Statuses</option>
+                                                <option value="Accepted">Accepted</option>
+                                                <option value="Pending">Pending</option>
+                                                <option value="Rejected">Rejected</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3 d-flex align-items-center mb-5">
+                                        <label class="me-2">Date:</label>
+                                        <input id="filter-date" type="date" class="form-control flatpickr-no-config" placeholder="Select date..">
+                                    </div>
+
+
+                                    <div class="col-md-3 d-flex justify-content-end mb-3">
+                                        <button id="export-btn" class="btn btn-success">Export to Excel</button>
+                                    </div>
+
+                                    <div class="col-md-12 me-3 mt-3 d-flex justify-content-end">
+                                        <input id="search-id"
+                                               type="text"
+                                               class="form-control"
+                                               placeholder="Search by ID"
+                                               style="max-width: 200px;" />
+                                        <button id="reset-filters" class="btn btn-danger ms-4">Reset Filters</button>
+                                    </div>
+                                </div>
+                                <table class="table" id="table1">
+                                    <thead>
+                                        <tr>
+                                            <th>Full Name</th>
+                                            <th>ID</th>
+                                            <th>National ID</th>
+                                            <th>Faculty</th>
+                                            <th>Phone</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Buttons</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="booking-table-body">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="row-count" class="mt-2 text-start text-muted"></div>
+
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+    <script src="assets/static/js/components/dark.js"></script>
+    <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/static/js/logout.js"></script>
+    <script src="assets/compiled/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="assets/static/js/role-guard.js"></script>
+    <script src="assets/extensions/jquery/jquery.min.js"></script>
+    <script src="assets/extensions/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/extensions/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="assets/extensions/flatpickr/flatpickr.min.js"></script>
+    <script src="assets/static/js/pages/date-picker.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        const studentAPI = 'https://localhost:7286/api/InterviewResult/present-students';
+        const resultAPI = 'https://localhost:7286/api/InterviewResult';
+
+        let students = [];
+        let studentStatuses = {};
+
+        async function fetchData() {
+            try {
+                const response = await fetch(studentAPI, { credentials: "include" });
+
+                if (!response.ok)
+                    throw new Error("Failed to fetch student data");
+
+                students = await response.json();
+
+                populateFacultyFilter();
+                populateStatusFilter();
+                renderTable();
+            } catch (error) {
+                console.error("❌ Error fetching data:", error);
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Could not load student data. Please try again."
+                });
+            }
+        }
+
+        function populateFacultyFilter() {
+            const facultySet = new Set(students.map(s => s.college).filter(Boolean));
+            const facultyFilter = document.getElementById('filter-faculty');
+            facultyFilter.innerHTML = '<option value="">All Faculties</option>';
+            facultySet.forEach(faculty => {
+                const option = document.createElement('option');
+                option.value = faculty;
+                option.textContent = faculty;
+                facultyFilter.appendChild(option);
+            });
+        }
+
+        function populateStatusFilter() {
+            const statusSet = new Set();
+            for (const status of Object.values(studentStatuses)) {
+                if (status) statusSet.add(status);
+            }
+            const statusFilter = document.getElementById('filter-status');
+            statusFilter.innerHTML = '<option value="">All Statuses</option>';
+            ["Accepted", "Pending", "Rejected"].forEach(st => {
+                const option = document.createElement('option');
+                option.value = st;
+                option.textContent = st;
+                statusFilter.appendChild(option);
+            });
+        }
+
+        async function renderTable(filterFaculty = '', searchID = '', filterStatus = '', filterDate = '') {
+            const table = $('#table1');
+            const tbody = document.getElementById('booking-table-body');
+
+            if ($.fn.DataTable.isDataTable('#table1')) {
+                table.DataTable().clear().destroy();
+            }
+
+            tbody.innerHTML = '';
+
+            const filtered = students.filter(student => {
+                const studentFaculty = (student.college || '').trim().toLowerCase();
+                const selectedFaculty = filterFaculty.trim().toLowerCase();
+                const matchesFaculty = !filterFaculty || studentFaculty === selectedFaculty;
+                const filterDate = document.getElementById('filter-date').value;
+
+                const matchesID = !searchID || student.universityID.toString().includes(searchID.trim());
+
+                const studentStatus = (studentStatuses[student.universityID]?.status || '').trim().toLowerCase();
+                const selectedStatus = filterStatus.trim().toLowerCase();
+                const matchesStatus = !filterStatus || studentStatus === selectedStatus;
+
+                const matchesDate = !filterDate || (() => {
+                    const selectedDate = filterDate.split(" ")[0];
+                    const studentDate = studentStatuses[student.universityID]?.filterDate;
+                    return studentDate === selectedDate;
+                })();
+
+
+
+                return matchesFaculty && matchesID && matchesStatus && matchesDate;
+            });
+
+            for (const student of filtered) {
+                let statusText = 'Loading...';
+                let buttonHTML = '';
+
+                try {
+                    const statusRes = await fetch(`${resultAPI}/${student.universityID}`, { credentials: 'include' });
+
+                    if (statusRes.status === 404) {
+                        statusText = 'No Status Yet';
+                        studentStatuses[student.universityID] = { status: statusText, date: '' };
+                    }
+                    else if (statusRes.ok) {
+                        const statusData = await statusRes.json();
+                        statusText = statusData?.interviewStatus || 'Not Set';
+
+                        let dateText = '';
+                        let isoDate = '';
+                        if (statusData?.timestamp) {
+                            const dateObj = new Date(statusData.timestamp);
+                            dateText = dateObj.toLocaleDateString() + ' ' + dateObj.toLocaleTimeString(); 
+                            isoDate = dateObj.toISOString().split('T')[0]; 
+                        }
+                        studentStatuses[student.universityID] = {
+                            status: statusText,
+                            date: dateText, 
+                            filterDate: isoDate   
+                        };
+
+
+                        const statusLower = statusText.toLowerCase();
+                        if (statusLower === 'accepted') {
+                            buttonHTML = `<button class="btn btn-sm btn-success" disabled>Accepted</button>`;
+                        }
+                        else if (statusLower === 'pending') {
+                            buttonHTML = `
+            <button class="btn btn-sm btn-success btn-accept" data-id="${student.universityID}">Accepted</button>
+            <button class="btn btn-sm btn-danger btn-reject" data-id="${student.universityID}">Rejected</button>
+        `;
+                        }
+                        else if (statusLower === 'rejected') {
+                            buttonHTML = `<button class="btn btn-sm btn-danger" disabled>Rejected</button>`;
+                        }
+                        else {
+                            buttonHTML = `
+            <button class="btn btn-sm btn-success btn-accept" data-id="${student.universityID}">Accepted</button>
+            <button class="btn btn-sm btn-warning btn-pending" data-id="${student.universityID}">Pending</button>
+            <button class="btn btn-sm btn-danger btn-reject" data-id="${student.universityID}">Rejected</button>
+        `;
+                        }
+                    }
+                    else {
+                        throw new Error(`Unexpected status: ${statusRes.status}`);
+                    }
+
+                } catch (err) {
+                    console.error(`❌ Error fetching status for ${student.universityID}:`, err);
+                    statusText = 'Error';
+                }
+
+
+                const row = `
+                                <tr>
+                                    <td>${student.fullName}</td>
+                                    <td>${student.universityID}</td>
+                                    <td>${student.nationalID}</td>
+                                    <td>${student.college}</td>
+                                    <td>${student.phone}</td>
+                                    <td>${studentStatuses[student.universityID]?.date || ''}</td>
+                                    <td>${statusText.charAt(0).toUpperCase() + statusText.slice(1) }</td>
+                                    <td>${buttonHTML}</td>
+                                </tr>
+                            `;
+                tbody.insertAdjacentHTML('beforeend', row);
+            }
+
+
+
+            table.DataTable({
+                pageLength: 10,
+                lengthMenu: [5, 10, 25, 50, 100],
+                language: {
+                    search: "Search:",
+                    lengthMenu: "Show _MENU_ entries per page",
+                    info: "Showing _START_ to _END_ of _TOTAL_ entries",
+                    paginate: {
+                        previous: "Previous",
+                        next: "Next"
+                    }
+                }
+            });
+        }
+
+        async function submitResult(universityID, result) {
+            try {
+                const hasStatus = studentStatuses[universityID] &&
+                    studentStatuses[universityID].status &&
+                    studentStatuses[universityID].status.toLowerCase() !== 'no status yet';
+
+                const method = hasStatus ? 'PUT' : 'POST';
+                const url = hasStatus ? `${resultAPI}/${universityID}` : resultAPI;
+
+                const res = await fetch(url, {
+                    method: method,
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ universityID, result })
+                });
+
+                if (!res.ok) {
+                    const errText = await res.text();
+                    throw new Error(errText);
+                }
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Status Saved',
+                    text: `Student ${universityID} marked as ${result}`
+                });
+
+                studentStatuses[universityID] = { status: result, date: new Date().toLocaleString() };
+                renderTable(
+                    document.getElementById('filter-faculty').value,
+                    document.getElementById('search-id').value,
+                    document.getElementById('filter-status').value
+                );
+
+            } catch (err) {
+                console.error("❌ Submission error:", err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed to Save',
+                    text: err.message
+                });
+            }
+        }
+
+
+        $(document).on('click', '.btn-accept, .btn-pending, .btn-reject', function () {
+            const universityID = $(this).data('id');
+            const result = $(this).hasClass('btn-accept') ? 'Accepted'
+                : $(this).hasClass('btn-pending') ? 'Pending'
+                    : 'Rejected';
+
+            Swal.fire({
+                icon: 'question',
+                title: `Mark as ${result}?`,
+                text: `Confirm setting status to "${result}" for student ${universityID}?`,
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'Cancel'
+            }).then((res) => {
+                if (!res.isConfirmed) return;
+                submitResult(universityID, result);
+            });
+
+            });
+
+        document.getElementById('filter-faculty').addEventListener('change', () => {
+            renderTable(
+                document.getElementById('filter-faculty').value,
+                '',
+                document.getElementById('filter-status').value
+            );
+        });
+
+        document.getElementById('filter-status').addEventListener('change', () => {
+            renderTable(
+                document.getElementById('filter-faculty').value,
+                '',
+                document.getElementById('filter-status').value
+            );
+        });
+
+        document.getElementById('search-id').addEventListener('input', function () {
+            renderTable(
+                document.getElementById('filter-faculty').value,
+                this.value,
+                document.getElementById('filter-status').value
+            );
+        });
+
+        document.getElementById('reset-filters').addEventListener('click', function () {
+            document.getElementById('filter-faculty').value = '';
+            document.getElementById('filter-status').value = '';
+            document.getElementById('filter-date').value = '';
+            document.getElementById('search-id').value = '';
+
+            renderTable('', '', '', '');
+        });
+
+
+        document.getElementById('filter-date').addEventListener('change', () => {
+            renderTable(
+                document.getElementById('filter-faculty').value,
+                document.getElementById('search-id').value,
+                document.getElementById('filter-status').value,
+                document.getElementById('filter-date').value
+            );
+        });
+
+
+        window.addEventListener('DOMContentLoaded', fetchData);
+
+
+
+    </script>
+
+
+
+    <script>
+        document.getElementById('export-btn').addEventListener('click', function () {
+            const table = document.getElementById('table1');
+            const rows = Array.from(table.querySelectorAll('tr'));
+            let csvContent = "";
+
+            rows.forEach((row, index) => {
+                const cells = Array.from(row.querySelectorAll('th, td'));
+                let rowData = [];
+
+                if (row.parentElement.tagName === 'THEAD') {
+                    rowData.push('"No."');
+                    for (let i = 0; i < cells.length - 1; i++) {
+                        rowData.push(`"${cells[i].innerText.trim().replace(/"/g, '""')}"`);
+                    }
+                } else {
+                    rowData.push(index);
+                    for (let i = 0; i < cells.length - 1; i++) {
+                        let cellText = cells[i].innerText.trim().replace(/"/g, '""');
+
+                        if (i === 2) {
+                            cellText = `=""${cellText}""`;
+                        }
+
+                        rowData.push(`"${cellText}"`);
+                    }
+                }
+
+                csvContent += rowData.join(",") + "\r\n";
+            });
+
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", "interview_students_export.csv");
+            link.style.display = "none";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+    </script>
+
+
+
+
+    <script src="assets/static/js/role-guard.js"></script>
+
+
+
+
+
+
+
+</body>
+
+</html>

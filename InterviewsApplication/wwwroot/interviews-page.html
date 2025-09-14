@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interviews page</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+
+
+
+    <link rel="stylesheet" href="./assets/compiled/css/app.css">
+    <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
+    <link rel="stylesheet" href="assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="assets/extensions/flatpickr/flatpickr.min.css">
+
+    <link rel="stylesheet" href="./assets/compiled/css/table-datatable-jquery.css">
+    <link rel="stylesheet" href="./assets/compiled/css/style.css">
+
+</head>
+
+<body>
+    <script src="assets/static/js/initTheme.js"></script>
+    <div id="app">
+        <div id="sidebar">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header position-relative">
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                 role="img" class="iconify iconify--system-uicons" width="20" height="20"
+                                 preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                   stroke-linejoin="round">
+                                    <path d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 19.5v-2m0-14v-2"
+                                          opacity=".3"></path>
+                                    <g transform="translate(-210 -1)">
+                                        <path d="M220.5 2.5v2m6.5.5l-1.5 1.5"></path>
+                                        <circle cx="220.5" cy="11.5" r="4"></circle>
+                                        <path d="m214 5l1.5 1.5m5 14v-2m6.5-.5l-1.5-1.5M214 18l1.5-1.5m-4-5h2m14 0h2"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                            <div class="form-check form-switch fs-6">
+                                <input class="form-check-input  me-0" type="checkbox" id="toggle-dark" style="cursor: pointer">
+                                <label class="form-check-label"></label>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                 role="img" class="iconify iconify--mdi" width="20" height="20" preserveAspectRatio="xMidYMid meet"
+                                 viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14c.4-.4.82-.76 1.27-1.08c.75-.53 1.93.36 1.85 1.19c-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82c-2.81 3.14-2.7 7.96.31 10.98c3.02 3.01 7.84 3.12 10.98.31Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="sidebar-toggler  x">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item " id="menu-dashboard">
+                            <a href="index.html" class="sidebar-link">
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item " id="menu-agents" style="display: none;">
+                            <a href="agents.html" class="sidebar-link">
+                                <i class="bi bi-file-earmark-person"></i>
+                                <span>Agents</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" id="menu-mail" style="display: none;">
+                            <a href="Mail.html" class="sidebar-link">
+                                <i class="bi bi-envelope"></i>
+                                <span>Mail</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" id="menu-schedule" style="display: none;">
+                            <a href="schedule.html" class="sidebar-link">
+                                <i class="bi bi-calendar-day"></i>
+                                <span>Schedule</span>
+                            </a>
+                        </li>
+
+                        <!--<li class="sidebar-item" id="menu-booking">
+        <a href="Students-booking.html" class="sidebar-link">
+            <i class="bi bi-calendar-check"></i>
+            <span>Students Booking</span>
+        </a>
+    </li>-->
+                        <li class="sidebar-item" id="menu-review">
+                            <a href="Review-students.html" class="sidebar-link">
+                                <i class="bi bi-calendar-check"></i>
+                                <span>Review students</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" id="send-emails">
+                            <a href="send-mail.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Send Emails</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item active" id="menu-interviews">
+                            <a href="interviews-page.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Interviews page</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" id="menu-stages">
+                            <a href="interview-stages.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Interview Stages</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" id="menu-stages">
+                            <a href="interview-result.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Interview Results</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" id="menu-stages">
+                            <a href="Acceptance-page.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Acceptance Page</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" id="menu-password">
+                            <a href="change-password.html" class="sidebar-link">
+                                <i class="bi bi-shield-check"></i>
+                                <span>Change Password</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item mx-auto text-center my-4">
+                            <button id="logoutBtn" class="btn btn-primary bg-primary mx-auto text-center">Logout</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Interviews page</h3>
+                            <p class="text-subtitle text-muted">You can find here all Interviews here</p>
+
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Interviews</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div class="row mb-3">
+
+                                    <div class="col-md-12 d-flex justify-content-end mb-3">
+                                        <button id="export-btn" class="btn btn-success">Export to Excel</button>
+                                    </div>
+
+                                    <h6>Filter by:</h6>
+                                    <div class="col-md-4 d-flex align-items-center">
+                                        <input type="checkbox" id="select-all" class="me-2">
+                                        <label style="width: 150px;" for="select-all" class="me-2">Select All</label>
+                                        <select id="bulk-action" class="form-select form-select-sm me-2 d-none">
+                                            <option value="">Choose Action</option>
+                                            <option value="present">Mark as Present</option>
+                                            <option value="absent">Mark as Absent</option>
+                                        </select>
+                                        <button id="apply-action" class="btn btn-primary btn-sm d-none">Apply</button>
+                                    </div>
+                                    <div class="col-md-4 d-flex align-items-center">
+                                        <label class="me-2">Date:</label>
+                                        <input id="filter-date" type="date" class="form-control flatpickr-no-config" placeholder="Select date..">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="input-group d-flex align-items-center">
+                                            <label class="me-2">Faculty:</label>
+                                            <select id="filter-faculty" class="form-select rounded">
+                                                <option value="">All Faculties</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="input-group d-flex align-items-center">
+                                            <label class="me-2">Status:</label>
+                                            <select id="filter-status" class="form-select rounded">
+                                                <option value="">Status</option>
+                                                <option value="absent">Absent</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12 me-3 mt-3 d-flex justify-content-end">
+                                        <input id="search-id"
+                                               type="text"
+                                               class="form-control"
+                                               placeholder="Search by ID"
+                                               style="max-width: 200px;" />
+                                        <button id="reset-filters" class="btn btn-danger ms-4">Reset Filters</button>
+                                    </div>
+                                </div>
+                                <table class="table" id="table1">
+                                    <thead>
+                                        <tr>
+                                            <th><input type="checkbox" class="select-all"></th>
+                                            <th>Full Name</th>
+                                            <th>Absent</th>
+                                            <th>ID</th>
+                                            <th>National ID</th>
+                                            <th>Faculty</th>
+                                            <th>Phone</th>
+                                            <th>Date</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="booking-table-body">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+
+        </div>
+    </div>
+    <script src="assets/static/js/components/dark.js"></script>
+    <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/compiled/js/app.js"></script>
+    <script src="assets/static/js/logout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const studentsAPI = 'https://localhost:7286/api/StudentsView/';
+        const allBookingsAPI = 'https://localhost:7286/api/StudentBooking/all';
+        const scheduleAPI = 'https://localhost:7286/api/InterviewSchedule/';
+        const historyAPI = 'https://localhost:7286/api/InterviewHistory/mark';
+        const userInfoAPI = 'https://localhost:7286/api/UserInfo/me';
+
+        let agent = null;
+        const departmentMap = {
+            "Personal Interview": 1,
+            "Medical": 2,
+            "English": 3
+        };
+
+        async function getAgentInfo() {
+            const res = await fetch(userInfoAPI);
+            if (!res.ok) throw new Error('Failed to get agent info');
+            return await res.json();
+        }
+
+        async function getAllBookings() {
+            const res = await fetch(allBookingsAPI);
+            if (!res.ok) throw new Error('Failed to get bookings');
+            return await res.json();
+        }
+
+        async function getStudentData(universityID, scheduleID) {
+            const studentRes = await fetch(`${studentsAPI}${universityID}`);
+            if (!studentRes.ok) return null;
+
+            const student = await studentRes.json();
+
+            const scheduleRes = await fetch(`${scheduleAPI}${scheduleID}`);
+            if (!scheduleRes.ok) return null;
+
+            const schedule = await scheduleRes.json();
+
+            return {
+                universityID: student.universityID,
+                fullName: student.fullName,
+                nationalID: student.nationalID,
+                college: student.college,
+                phone: student.phone,
+                date: schedule.interviewDate
+            };
+        }
+
+        function renderStudentRow(data, allHistories, agentDept) {
+            const tbody = document.getElementById('booking-table-body');
+            const row = document.createElement('tr');
+            row.id = `row-${data.universityID}`;
+
+            let absentIcon = '';
+            const studentHistory = allHistories.find(h =>
+                String(h.universityID) === String(data.universityID) &&
+                h.department?.toLowerCase() === agentDept.toLowerCase()
+            );
+
+            if (studentHistory?.interviewStatus?.toLowerCase() === 'absent') {
+                absentIcon = `<span style="color: red; font-weight: bold;">❌</span>`;
+            }
+
+            row.innerHTML = `
+                                        <td><input type="checkbox" class="row-checkbox"></td>
+                                        <td>${data.fullName}</td>
+                                        <td class="absent-status">${absentIcon}</td>
+                                        <td>${data.universityID}</td>
+                                        <td>${data.nationalID}</td>
+                                        <td>${data.college}</td>
+                                        <td>${data.phone}</td>
+                                        <td>${new Date(data.date).toLocaleDateString()}</td>
+                                        <td>
+                                            <button class="btn btn-success btn-sm" onclick="markAttendance('${data.universityID}', 'Present')">Present</button>
+                                            <button class="btn btn-danger btn-sm" onclick="markAttendance('${data.universityID}', 'Absent')">Absent</button>
+                                        </td>
+                                    `;
+            tbody.appendChild(row);
+        }
+
+        async function markAttendance(universityID, status) {
+            if (!agent) {
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Agent Error',
+                    text: 'Agent info not loaded'
+                });
+            }
+
+
+            const departmentID = departmentMap[agent.department];
+            if (!departmentID) {
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Department Error',
+                    text: 'Invalid department'
+                });
+            }
+
+            const statusFormatted = status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
+            const url = `${historyAPI}?universityId=${universityID}&status=${statusFormatted}`;
+
+            const res = await fetch(url, { method: 'POST' });
+
+            if (res.ok) {
+                const row = document.getElementById(`row-${universityID}`);
+                if (statusFormatted === "Present") {
+                    row?.remove();
+                } else if (statusFormatted === "Absent") {
+                    const cell = row?.querySelector('.absent-status');
+                    if (cell) {
+                        cell.innerHTML = `<span style="color: red; font-weight: bold;">❌</span>`;
+                    }
+                }
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Failed to mark attendance'
+                });
+            }
+        }
+
+        function cleanDate(inputDate) {
+            if (!inputDate) return '';
+            return inputDate.split('T')[0] || inputDate.split(' ')[0];
+        }
+
+        function handleFilterChange() {
+            const faculty = document.getElementById('filter-faculty').value.trim().toLowerCase();
+            const selectedDate = document.getElementById('filter-date').value.trim();
+            const searchID = document.getElementById('search-id').value.trim();
+            const statusFilter = document.getElementById('filter-status').value.trim().toLowerCase();
+
+            const tbody = document.getElementById('booking-table-body');
+            tbody.innerHTML = '';
+
+            window.filteredBookingData?.forEach(({ studentData, allHistories }) => {
+                const studentFaculty = studentData.college?.toLowerCase().trim();
+                const rowDate = studentData.date || '';
+                const rowDateOnly = rowDate.split('T')[0];
+                const selectedDateOnly = selectedDate.split(' ')[0];
+
+                const matchFaculty = !faculty || studentFaculty === faculty;
+                const matchDate = !selectedDate || rowDateOnly === selectedDateOnly;
+                const matchID = !searchID || studentData.universityID.toString().includes(searchID);
+
+                const studentHistory = allHistories.find(h =>
+                    String(h.universityID) === String(studentData.universityID) &&
+                    h.department?.toLowerCase() === agent.department.toLowerCase()
+                );
+                const currentStatus = studentHistory?.interviewStatus?.toLowerCase() || '';
+
+                const matchStatus = !statusFilter || currentStatus === statusFilter;
+
+                if (matchFaculty && matchDate && matchID && matchStatus) {
+                    renderStudentRow(studentData, allHistories, agent.department);
+                }
+            });
+        }
+
+
+
+
+
+
+        function populateFacultyFilter() {
+            const facultySet = new Set(window.filteredBookingData.map(({ studentData }) => studentData.college).filter(Boolean));
+            const facultySelect = document.getElementById('filter-faculty');
+            facultySet.forEach(faculty => {
+                const option = document.createElement('option');
+                option.value = faculty;
+                option.textContent = faculty;
+                facultySelect.appendChild(option);
+            });
+        }
+
+        async function init() {
+            try {
+                agent = await getAgentInfo();
+                const agentDept = agent.department;
+
+                const [allBookings, allHistories] = await Promise.all([
+                    getAllBookings(),
+                    fetch('https://localhost:7286/api/InterviewHistory').then(res => res.json())
+                ]);
+
+                const filteredBookings = allBookings.filter(booking => {
+                    const history = allHistories.find(h =>
+                        String(h.universityID) === String(booking.universityID) &&
+                        h.department?.toLowerCase() === agentDept.toLowerCase()
+                    );
+                    return !history || history.interviewStatus?.toLowerCase() !== 'present';
+                });
+
+                window.filteredBookingData = [];
+
+                for (const booking of filteredBookings) {
+                    const studentData = await getStudentData(booking.universityID, booking.scheduleID);
+                    if (studentData) {
+                        window.filteredBookingData.push({ studentData, allHistories });
+                        renderStudentRow(studentData, allHistories, agentDept);
+                    }
+                }
+
+                populateFacultyFilter();
+            } catch (err) {
+                console.error('Error loading data:', err);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+
+            document.getElementById('reset-filters').addEventListener('click', () => {
+                document.getElementById('filter-date').value = '';
+                document.getElementById('filter-faculty').value = '';
+                document.getElementById('search-id').value = '';
+                document.getElementById('filter-status').value = '';
+                handleFilterChange();
+            });
+
+            document.getElementById('filter-status').addEventListener('change', handleFilterChange);
+
+            document.getElementById('filter-faculty').addEventListener('change', handleFilterChange);
+            document.getElementById('filter-date').addEventListener('change', handleFilterChange);
+            document.getElementById('search-id').addEventListener('input', handleFilterChange);
+        });
+    </script>
+
+
+
+    <script>
+        document.getElementById('select-all').addEventListener('change', function () {
+            const checked = this.checked;
+            document.querySelectorAll('.row-checkbox').forEach(chk => chk.checked = checked);
+            document.getElementById('bulk-action').classList.toggle('d-none', !checked);
+            document.getElementById('apply-action').classList.toggle('d-none', !checked);
+        });
+
+        document.getElementById('apply-action').addEventListener('click', async function () {
+            const action = document.getElementById('bulk-action').value;
+            if (!action) {
+                if (!action) {
+                    return Swal.fire({
+                        icon: 'warning',
+                        title: 'No Action Selected',
+                        text: 'Please select an action before applying.'
+                    });
+                }
+                return;
+            }
+
+            const selectedRows = Array.from(document.querySelectorAll('.row-checkbox:checked'));
+            if (selectedRows.length === 0) {
+                if (selectedRows.length === 0) {
+                    return Swal.fire({
+                        icon: 'warning',
+                        title: 'No Students Selected',
+                        text: 'Please select at least one student.'
+                    });
+                }
+                return;
+            }
+
+            for (const chk of selectedRows) {
+                const row = chk.closest('tr');
+                const universityId = row.cells[3].innerText.trim();
+
+                try {
+                    const response = await fetch(`https://localhost:7286/api/InterviewHistory/mark?universityId=${universityId}&status=${action}`, {
+                        method: 'POST'
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        console.log(`✅ Marked ${universityId} as ${action}:`, result.message);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: `Student ${universityId} marked as "${action}".`
+                        });
+                    } else {
+                        const errorText = await response.text();
+                        console.error(`❌ Failed to mark ${universityId}:`, errorText);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Update Failed',
+                            text: `Could not mark ${universityId}: ${errorText}`
+                        });
+                    }
+                } catch (err) {
+                    console.error(`❌ Error processing ${universityId}:`, err);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Unexpected Error',
+                        text: `An error occurred while processing ${universityId}.`
+                    });
+                }
+            }
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Bulk Action Complete',
+                text: `Successfully marked all selected students as "${action}".`
+            }).then(() => {
+                location.reload();
+            });
+
+        });
+    </script>
+
+    <script>
+        document.getElementById('select-all').addEventListener('change', function () {
+            const checked = this.checked;
+            document.querySelectorAll('.row-checkbox').forEach(chk => chk.checked = checked);
+            document.getElementById('bulk-action').classList.toggle('d-none', !checked);
+        });
+    </script>
+
+
+
+    <script>
+        document.getElementById('export-btn').addEventListener('click', function () {
+            const table = document.getElementById('table1');
+            const rows = Array.from(table.querySelectorAll('tr'));
+            let csvContent = "";
+
+            rows.forEach((row, index) => {
+                const cells = Array.from(row.querySelectorAll('th, td'));
+                let rowData = [];
+
+                if (row.parentElement.tagName === 'THEAD') {
+                    rowData.push('"No."');
+                    rowData.push(`"${cells[1].innerText.trim()}"`); // Full Name
+                    const universityId = cells[3].innerText.trim();
+                    rowData.push(`"=""${universityId.replace(/"/g, '""')}"""`);
+                    rowData.push(`"${cells[4].innerText.trim()}"`); // National ID
+                    rowData.push(`"${cells[5].innerText.trim()}"`); // Faculty
+                    rowData.push(`"${cells[6].innerText.trim()}"`); // Phone
+                    rowData.push(`"${cells[7].innerText.trim()}"`); // Date
+                } else {
+                    rowData.push(index);
+                    rowData.push(`"${cells[1].innerText.trim().replace(/"/g, '""')}"`); // Full Name
+                    rowData.push(`"${cells[3].innerText.trim().replace(/"/g, '""')}"`); // ID
+
+                    const nationalId = cells[4].innerText.trim();
+                    rowData.push(`"=""${nationalId.replace(/"/g, '""')}"""`);
+
+                    rowData.push(`"${cells[5].innerText.trim().replace(/"/g, '""')}"`); // Faculty
+                    rowData.push(`"${cells[6].innerText.trim().replace(/"/g, '""')}"`); // Phone
+                    rowData.push(`"${cells[7].innerText.trim().replace(/"/g, '""')}"`); // Date
+                }
+
+                csvContent += rowData.join(",") + "\r\n";
+            });
+
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", "interview_students_export.csv");
+            link.style.display = "none";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
+
+
+
+
+    <script src="assets/extensions/jquery/jquery.min.js"></script>
+    <script src="assets/extensions/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/extensions/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+
+
+
+    <script src="assets/extensions/flatpickr/flatpickr.min.js"></script>
+    <script src="assets/static/js/pages/date-picker.js"></script>
+    <script src="assets/static/js/role-guard.js"></script>
+
+</body>
+
+</html>
