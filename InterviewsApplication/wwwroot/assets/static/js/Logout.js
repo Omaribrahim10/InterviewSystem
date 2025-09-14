@@ -19,7 +19,7 @@
                 sessionStorage.clear();
                 localStorage.clear();
 
-                window.location.href = "https://localhost:7286/admin-login.html";
+                window.location.href = "https://localhost:7286/dashboard.html";
             } catch (error) {
                 console.error("Logout error:", error);
                 alert("Something went wrong during logout.");

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+
+
+
+
+
+    <link rel="stylesheet" href="./assets/compiled/css/app.css">
+    <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
+    <link rel="stylesheet" href="./assets/compiled/css/iconly.css">
+    <link rel="stylesheet" href="./assets/compiled/css/style.css">
+    <meta charset="UTF-8">
+    <title>Present Students per College</title>
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+
+</head>
+
+<body>
+
+
+    <script src="assets/static/js/initTheme.js"></script>
+    <div id="app">
+        <div id="sidebar">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header position-relative">
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                 role="img" class="iconify iconify--system-uicons" width="20" height="20"
+                                 preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
+                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                                   stroke-linejoin="round">
+                                    <path d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 19.5v-2m0-14v-2"
+                                          opacity=".3"></path>
+                                    <g transform="translate(-210 -1)">
+                                        <path d="M220.5 2.5v2m6.5.5l-1.5 1.5"></path>
+                                        <circle cx="220.5" cy="11.5" r="4"></circle>
+                                        <path d="m214 5l1.5 1.5m5 14v-2m6.5-.5l-1.5-1.5M214 18l1.5-1.5m-4-5h2m14 0h2"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                            <div class="form-check form-switch fs-6">
+                                <input class="form-check-input  me-0" type="checkbox" id="toggle-dark" style="cursor: pointer">
+                                <label class="form-check-label"></label>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                 role="img" class="iconify iconify--mdi" width="20" height="20" preserveAspectRatio="xMidYMid meet"
+                                 viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14c.4-.4.82-.76 1.27-1.08c.75-.53 1.93.36 1.85 1.19c-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82c-2.81 3.14-2.7 7.96.31 10.98c3.02 3.01 7.84 3.12 10.98.31Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="sidebar-toggler  x">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item active" id="menu-dashboard">
+                            <a href="dashboard.html" class="sidebar-link">
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item " id="menu-agents" style="display: none;">
+                            <a href="agents.html" class="sidebar-link">
+                                <i class="bi bi-file-earmark-person"></i>
+                                <span>Agents</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" id="menu-mail" style="display: none;">
+                            <a href="Mail.html" class="sidebar-link">
+                                <i class="bi bi-envelope"></i>
+                                <span>Mail</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" id="menu-schedule" style="display: none;">
+                            <a href="schedule.html" class="sidebar-link">
+                                <i class="bi bi-calendar-day"></i>
+                                <span>Schedule</span>
+                            </a>
+                        </li>
+
+                        <!--<li class="sidebar-item" id="menu-booking">
+                            <a href="Students-booking.html" class="sidebar-link">
+                                <i class="bi bi-calendar-check"></i>
+                                <span>Students Booking</span>
+                            </a>
+                        </li>-->
+                        <li class="sidebar-item " id="menu-review">
+                            <a href="Review-students.html" class="sidebar-link">
+                                <i class="bi bi-calendar-check"></i>
+                                <span>Review students</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" id="send-emails">
+                            <a href="send-mail.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Send Emails</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" id="menu-interviews">
+                            <a href="interviews-page.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Interviews page</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" id="menu-stages">
+                            <a href="interview-stages.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Interview Stages</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" id="menu-stages">
+                            <a href="interview-result.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Interview Results</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" id="menu-stages">
+                            <a href="Acceptance-page.html" class="sidebar-link">
+                                <i class="bi bi-person-video2"></i>
+                                <span>Acceptance Page</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" id="menu-password">
+                            <a href="change-password.html" class="sidebar-link">
+                                <i class="bi bi-shield-check"></i>
+                                <span>Change Password</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item mx-auto text-center my-4">
+                            <button id="logoutBtn" class="btn btn-primary bg-primary mx-auto text-center">Logout</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <h3>Profile Statistics</h3>
+            </div>
+            <div class="page-content">
+                <section class="row">
+                    <div class="col-12 col-lg-9">
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card shadow-sm border-0 rounded-3">
+                                    <div class="card-header bg-primary text-white">
+                                        <h5 class="mb-3">📊 Present/Absent Students per College</h5>
+
+                                        <div class="d-flex align-items-center gap-3">
+                                            <label for="datePicker" class="mb-0">Start Date:</label>
+                                            <input type="date" id="datePicker" class="form-control form-control-sm">
+
+                                            <label for="datePickerEnd" class="mb-0">End Date:</label>
+                                            <input type="date" id="datePickerEnd" class="form-control form-control-sm">
+
+                                            <label for="statusFilter" class="mb-0">Status:</label>
+                                            <select id="statusFilter" class="form-select form-select-sm">
+                                                <option value="both">Both</option>
+                                                <option value="present">Present</option>
+                                                <option value="absent">Absent</option>
+                                            </select>
+                                            <label for="chartType" class="mb-0">Chart Type:</label>
+                                            <select id="chartType" class="form-select form-select-sm">
+                                                <option value="bar">Bar</option>
+                                                <option value="pie">Pie</option>
+                                                <option value="scatter">Scatter</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div id="collegeChart" style="height: 400px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow-sm border-0 rounded-3">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">📊 Accepted/Rejected Students per College</h5>
+
+                                    <div class="d-flex flex-wrap align-items-center gap-3">
+
+                                        <div class="d-flex align-items-center gap-2">
+                                            <label for="statusFilter2" class="form-label mb-0">Status:</label>
+                                            <select id="statusFilter2" class="form-select form-select-sm">
+                                                <option value="All">All</option>
+                                                <option value="Accepted">Accepted</option>
+                                                <option value="Pending">Pending</option>
+                                                <option value="Rejected">Rejected</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="d-flex align-items-center gap-2">
+                                            <label for="chartType2" class="form-label mb-0">Chart Type:</label>
+                                            <select id="chartType2" class="form-select form-select-sm">
+                                                <option value="bar">Bar</option>
+                                                <option value="pie">Pie</option>
+                                                <option value="scatter">Scatter</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="d-flex align-items-center gap-2">
+                                            <label for="startDate2" class="form-label mb-0">Start Date:</label>
+                                            <input type="date" id="startDate2" class="form-control form-control-sm" />
+                                        </div>
+
+                                        <div class="d-flex align-items-center gap-2">
+                                            <label for="endDate2" class="form-label mb-0">End Date:</label>
+                                            <input type="date" id="endDate2" class="form-control form-control-sm" />
+                                        </div>
+
+                                        <button id="downloadChart2"
+                                                style="background-color: #1b1b29; color: white; border: 2px solid #435ebe; border-radius: 6px; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                                            Download Chart
+                                        </button>
+
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <canvas id="collegeChart2" height="400"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+  
+                    </div>
+
+
+                </section>
+            </div>
+
+
+        </div>
+    </div>
+    <script src="assets/static/js/components/dark.js"></script>
+    <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+
+
+    <script src="assets/compiled/js/app.js"></script>
+    <script src="assets/static/js/logout.js"></script>
+
+
+    <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
+    <script src="assets/static/js/pages/dashboard.js"></script>
+    <script src="assets/static/js/role-guard.js"></script>
+
+
+
+    <script>
+        const studentsAPI = 'https://localhost:7286/api/StudentsView';
+        const historiesAPI = 'https://localhost:7286/api/InterviewHistory';
+        const bookingsAPI = 'https://localhost:7286/api/StudentBooking/all';
+
+        let students = [];
+        let histories = [];
+        let bookings = [];
+
+        async function init() {
+            try {
+                const [studentsRes, historiesRes, bookingsRes] = await Promise.all([
+                    fetch(studentsAPI, { credentials: 'include' }),
+                    fetch(historiesAPI, { credentials: 'include' }),
+                    fetch(bookingsAPI, { credentials: 'include' })
+                ]);
+
+                students = await studentsRes.json();
+                histories = await historiesRes.json();
+                bookings = await bookingsRes.json();
+
+                const uniqueDates = [...new Set(bookings.map(b => b.scheduleDate.split('T')[0]))].sort();
+
+                const startDateInput = document.getElementById('datePicker');
+                const endDateInput = document.getElementById('datePickerEnd');
+
+                startDateInput.min = uniqueDates[0];
+                startDateInput.max = uniqueDates[uniqueDates.length - 1];
+                endDateInput.min = uniqueDates[0];
+                endDateInput.max = uniqueDates[uniqueDates.length - 1];
+
+                startDateInput.value = '';
+                endDateInput.value = '';
+
+                startDateInput.addEventListener('change', updateChart);
+                endDateInput.addEventListener('change', updateChart);
+                document.getElementById('statusFilter').addEventListener('change', updateChart);
+                document.getElementById('chartType').addEventListener('change', updateChart);
+
+                document.getElementById('toggle-dark').addEventListener('change', updateChart);
+
+                updateChart();
+            } catch (err) {
+                console.error("Error initializing chart:", err);
+            }
+        }
+
+        function updateChart() {
+            const startDate = document.getElementById('datePicker').value;
+            const endDate = document.getElementById('datePickerEnd').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const chartType = document.getElementById('chartType').value;
+            const darkMode = document.getElementById('toggle-dark').checked;
+
+            let bookedIDs = new Set();
+            const start = startDate ? new Date(startDate) : null;
+            const end = endDate ? new Date(endDate) : null;
+
+            bookings.forEach(b => {
+                const bDate = new Date(b.scheduleDate.split('T')[0]);
+                if (!start && !end) bookedIDs.add(b.universityID);
+                else if (start && !end && bDate.getTime() === start.getTime()) bookedIDs.add(b.universityID);
+                else if (!start && end && bDate <= end) bookedIDs.add(b.universityID);
+                else if (start && end && bDate >= start && bDate <= end) bookedIDs.add(b.universityID);
+            });
+
+            const presentIDs = new Set(
+                histories.filter(h => h.interviewStatus?.toLowerCase() === "present" && bookedIDs.has(h.universityID))
+                    .map(h => h.universityID)
+            );
+            const absentIDs = new Set(
+                histories.filter(h => h.interviewStatus?.toLowerCase() === "absent" && bookedIDs.has(h.universityID))
+                    .map(h => h.universityID)
+            );
+
+            const countsPresent = {};
+            const countsAbsent = {};
+
+            students.forEach(student => {
+                const college = student.college || "Unknown";
+                if (presentIDs.has(student.universityID)) countsPresent[college] = (countsPresent[college] || 0) + 1;
+                if (absentIDs.has(student.universityID)) countsAbsent[college] = (countsAbsent[college] || 0) + 1;
+            });
+
+            const colleges = [...new Set([...Object.keys(countsPresent), ...Object.keys(countsAbsent)])]
+                .sort()
+                .map(c => c.replace(/ /g, '<br>'));
+
+            let totalStudents = 0;
+            if (statusFilter === 'present') {
+                totalStudents = Object.values(countsPresent).reduce((a, b) => a + b, 0);
+            } else if (statusFilter === 'absent') {
+                totalStudents = Object.values(countsAbsent).reduce((a, b) => a + b, 0);
+            } else if (statusFilter === 'both') {
+                totalStudents = Object.values(countsPresent).reduce((a, b) => a + b, 0) +
+                    Object.values(countsAbsent).reduce((a, b) => a + b, 0);
+            }
+
+            let traces = [];
+            let layout = {
+                title: { text: `Students — Total: ${totalStudents}` },
+                plot_bgcolor: darkMode ? '#1e1e2d' : '#ffffff',
+                paper_bgcolor: darkMode ? '#1e1e2d' : '#ffffff',
+                font: { family: 'Segoe UI, sans-serif', size: 14, color: darkMode ? '#fff' : '#000' },
+                margin: { t: 50, r: 20, l: 50, b: 60 }
+            };
+
+
+            if (chartType === 'bar') {
+                if (statusFilter === 'present' || statusFilter === 'both') {
+                    traces.push({
+                        x: colleges,
+                        y: colleges.map(c => countsPresent[c.replace(/<br>/g, ' ')] || 0),
+                        type: 'bar',
+                        name: 'Present',
+                        marker: { color: '#435ebe' }
+                    });
+                }
+                if (statusFilter === 'absent' || statusFilter === 'both') {
+                    traces.push({
+                        x: colleges,
+                        y: colleges.map(c => countsAbsent[c.replace(/<br>/g, ' ')] || 0),
+                        type: 'bar',
+                        name: 'Absent',
+                        marker: { color: '#e74c3c' }
+                    });
+                }
+                layout.barmode = statusFilter === 'both' ? 'group' : 'stack';
+                layout.xaxis = { tickangle: 0, showgrid: true, gridcolor: darkMode ? '#3a3a4a' : '#ccc', zeroline: false };
+                layout.yaxis = { zeroline: false, gridcolor: darkMode ? '#3a3a4a' : '#ccc', dtick: 1 };
+                layout.bargap = 0.3;
+
+            } else if (chartType === 'pie') {
+                let pieLabels = [];
+                let pieValues = [];
+                if (statusFilter === 'present' || statusFilter === 'both') {
+                    pieLabels.push(...Object.keys(countsPresent));
+                    pieValues.push(...Object.values(countsPresent));
+                }
+                if (statusFilter === 'absent' || statusFilter === 'both') {
+                    pieLabels.push(...Object.keys(countsAbsent));
+                    pieValues.push(...Object.values(countsAbsent));
+                }
+                traces.push({ labels: pieLabels, values: pieValues, type: 'pie' });
+                layout.margin = { t: 50, r: 20, l: 20, b: 20 };
+
+            } else if (chartType === 'scatter') {
+                if (statusFilter === 'present' || statusFilter === 'both') {
+                    traces.push({
+                        x: colleges,
+                        y: colleges.map(c => countsPresent[c.replace(/<br>/g, ' ')] || 0),
+                        mode: 'markers+lines',
+                        name: 'Present',
+                        marker: { color: '#435ebe', size: 10 }
+                    });
+                }
+                if (statusFilter === 'absent' || statusFilter === 'both') {
+                    traces.push({
+                        x: colleges,
+                        y: colleges.map(c => countsAbsent[c.replace(/<br>/g, ' ')] || 0),
+                        mode: 'markers+lines',
+                        name: 'Absent',
+                        marker: { color: '#e74c3c', size: 10 }
+                    });
+                }
+                layout.xaxis = { tickangle: 0, showgrid: true, gridcolor: darkMode ? '#3a3a4a' : '#ccc', zeroline: false };
+                layout.yaxis = { zeroline: false, gridcolor: darkMode ? '#3a3a4a' : '#ccc', dtick: 1 };
+            }
+
+            Plotly.newPlot('collegeChart', traces, layout, { responsive: true });
+        }
+
+        init();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+   
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            const ctx = document.getElementById("collegeChart2").getContext("2d");
+            let chartInstance;
+
+            async function fetchCollegeSummary(startDate = null, endDate = null) {
+                let url = "https://localhost:7286/api/InterviewResult/college-summary";
+                const params = new URLSearchParams();
+
+                if (startDate) params.append("startDate", startDate);
+                if (endDate) params.append("endDate", endDate);
+
+                if ([...params].length) url += "?" + params.toString();
+
+                const response = await fetch(url, { credentials: "include" });
+                const data = await response.json();
+                console.log("College Summary API Response:", data);
+                return data;
+            }
+
+            function renderChart(type, status, data) {
+                if (chartInstance) chartInstance.destroy();
+
+                const labels = data.map(d => d.college.split(" "));
+                let datasets = [];
+
+                let totalStudents = 0;
+                switch (status) {
+                    case "All":
+                        totalStudents = data.reduce((sum, d) => sum + d.accepted + d.pending + d.rejected, 0);
+                        break;
+                    case "Accepted":
+                        totalStudents = data.reduce((sum, d) => sum + d.accepted, 0);
+                        break;
+                    case "Pending":
+                        totalStudents = data.reduce((sum, d) => sum + d.pending, 0);
+                        break;
+                    case "Rejected":
+                        totalStudents = data.reduce((sum, d) => sum + d.rejected, 0);
+                        break;
+                }
+
+                if (type === "pie" || type === "doughnut") {
+                    let values;
+                    const colors = [
+                        "rgba(54, 162, 235, 0.7)",
+                        "rgba(255, 206, 86, 0.7)",
+                        "rgba(255, 99, 132, 0.7)",
+                        "rgba(75, 192, 192, 0.7)",
+                        "rgba(153, 102, 255, 0.7)",
+                        "rgba(255, 159, 64, 0.7)"
+                    ];
+
+                    if (status === "All") values = data.map(d => d.accepted + d.pending + d.rejected);
+                    else if (status === "Accepted") values = data.map(d => d.accepted);
+                    else if (status === "Rejected") values = data.map(d => d.rejected);
+                    else if (status === "Pending") values = data.map(d => d.pending);
+
+                    datasets = [{
+                        label: `Students (${status})`,
+                        data: values,
+                        backgroundColor: colors,
+                        borderWidth: 1
+                    }];
+                } else {
+                    if (status === "All") {
+                        datasets = [
+                            { label: "Accepted", data: data.map(d => d.accepted), backgroundColor: "rgba(54, 162, 235, 0.7)", borderColor: "rgba(54, 162, 235, 1)", borderWidth: 1, barPercentage: 1.0, categoryPercentage: 0.8 },
+                            { label: "Pending", data: data.map(d => d.pending), backgroundColor: "rgba(255, 206, 86, 0.7)", borderColor: "rgba(255, 206, 86, 1)", borderWidth: 1, barPercentage: 1.0, categoryPercentage: 0.8 },
+                            { label: "Rejected", data: data.map(d => d.rejected), backgroundColor: "rgba(255, 99, 132, 0.7)", borderColor: "rgba(255, 99, 132, 1)", borderWidth: 1, barPercentage: 1.0, categoryPercentage: 0.8 }
+                        ];
+                    } else {
+                        let dataset, label, color, border;
+                        switch (status) {
+                            case "Accepted": dataset = data.map(d => d.accepted); label = "Accepted"; color = "rgba(54, 162, 235, 0.7)"; border = "rgba(54, 162, 235, 1)"; break;
+                            case "Rejected": dataset = data.map(d => d.rejected); label = "Rejected"; color = "rgba(255, 99, 132, 0.7)"; border = "rgba(255, 99, 132, 1)"; break;
+                            case "Pending": dataset = data.map(d => d.pending); label = "Pending"; color = "rgba(255, 206, 86, 0.7)"; border = "rgba(255, 206, 86, 1)"; break;
+                        }
+                        datasets = [{ label, data: dataset, backgroundColor: color, borderColor: border, borderWidth: 1, barPercentage: 1.0, categoryPercentage: 0.8 }];
+                    }
+
+                    if (type === "scatter") {
+                        datasets = datasets.map(ds => ({
+                            ...ds,
+                            showLine: true,
+                            fill: false,
+                            tension: 0.3,
+                            pointRadius: 5,
+                            pointHoverRadius: 7,
+                            data: ds.data.map((y, i) => ({ x: i + 1, y }))
+                        }));
+                    }
+                }
+
+                chartInstance = new Chart(ctx, {
+                    type: type,
+                    data: { labels, datasets },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: "top" },
+                            title: { display: true, text: `Students (${status}) — Total: ${totalStudents}` }
+                        },
+                        scales: (type === "pie" || type === "doughnut") ? {} : {
+                            x: { ticks: { callback: function (val, index) { return this.getLabelForValue(index); } } }
+                        }
+                    }
+                });
+            }
+
+            let summaryData = await fetchCollegeSummary();
+            renderChart("bar", "All", summaryData);
+
+            document.getElementById("chartType2").addEventListener("change", function () {
+                renderChart(this.value, document.getElementById("statusFilter2").value, summaryData);
+            });
+            document.getElementById("statusFilter2").addEventListener("change", function () {
+                renderChart(document.getElementById("chartType2").value, this.value, summaryData);
+            });
+
+            async function updateChartWithDateFilter() {
+                const startDate = document.getElementById("startDate2").value;
+                const endDate = document.getElementById("endDate2").value;
+
+                summaryData = await fetchCollegeSummary(startDate || null, endDate || null);
+                renderChart(document.getElementById("chartType2").value, document.getElementById("statusFilter2").value, summaryData);
+            }
+
+            document.getElementById("startDate2").addEventListener("change", updateChartWithDateFilter);
+            document.getElementById("endDate2").addEventListener("change", updateChartWithDateFilter);
+
+            document.getElementById("downloadChart2").addEventListener("click", function () {
+                if (chartInstance) {
+                    const link = document.createElement("a");
+                    link.href = chartInstance.toBase64Image();
+                    link.download = "college_chart.png";
+                    link.click();
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+</body>
+</html>
+

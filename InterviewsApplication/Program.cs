@@ -124,7 +124,7 @@ app.Use(async (context, next) =>
 {
     if (context.Request.Path == "/" && !context.Request.Path.StartsWithSegments("/swagger"))
     {
-        context.Response.Redirect("/admin-login.html");
+        context.Response.Redirect("/index.html");
         return;
     }
 
